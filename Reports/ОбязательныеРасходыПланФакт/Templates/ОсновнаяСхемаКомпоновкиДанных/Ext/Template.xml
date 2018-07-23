@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataCompositionSchema xmlns="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcscom="http://v8.1c.ru/8.1/data-composition-system/common" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<dataSource>
+		<name>ИсточникДанных1</name>
+		<dataSourceType>Local</dataSourceType>
+	</dataSource>
+	<dataSet xsi:type="DataSetQuery">
+		<name>НаборДанных1</name>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Адресат</dataPath>
+			<field>Адресат</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ДополнительнаяАналитика</dataPath>
+			<field>ДополнительнаяАналитика</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>Источник</dataPath>
+			<field>Источник</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>СуммаКонечныйОстаток</dataPath>
+			<field>СуммаКонечныйОстаток</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Сумма</dcscom:balanceGroupName>
+				<dcscom:balanceType>ClosingBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>СуммаРасход</dataPath>
+			<field>СуммаРасход</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>СуммаНачальныйОстаток</dataPath>
+			<field>СуммаНачальныйОстаток</field>
+			<role>
+				<dcscom:balance>true</dcscom:balance>
+				<dcscom:balanceGroupName>Сумма</dcscom:balanceGroupName>
+				<dcscom:balanceType>OpeningBalance</dcscom:balanceType>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>СуммаПриход</dataPath>
+			<field>СуммаПриход</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>СуммаОборот</dataPath>
+			<field>СуммаОборот</field>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ТемаПокупки</dataPath>
+			<field>ТемаПокупки</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<field xsi:type="DataSetFieldField">
+			<dataPath>ПериодБюждета</dataPath>
+			<field>ПериодБюждета</field>
+			<role>
+				<dcscom:dimension>true</dcscom:dimension>
+			</role>
+		</field>
+		<dataSource>ИсточникДанных1</dataSource>
+		<query>ВЫБРАТЬ
+	ОбязательныеРасходыПланФактОстаткиИОбороты.Источник,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.Адресат,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.ТемаПокупки,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.ДополнительнаяАналитика,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.СуммаНачальныйОстаток,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.СуммаКонечныйОстаток,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.СуммаОборот,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.СуммаПриход,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.СуммаРасход,
+	ОбязательныеРасходыПланФактОстаткиИОбороты.ПериодБюждета
+ИЗ
+	РегистрНакопления.ОбязательныеРасходыПланФакт.ОстаткиИОбороты(&amp;НачалоПериода, &amp;КонецПериода, Период, ДвиженияИГраницыПериода, ) КАК ОбязательныеРасходыПланФактОстаткиИОбороты</query>
+	</dataSet>
+	<totalField>
+		<dataPath>СуммаКонечныйОстаток</dataPath>
+		<expression>Сумма(СуммаКонечныйОстаток)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>СуммаНачальныйОстаток</dataPath>
+		<expression>Сумма(СуммаНачальныйОстаток)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>СуммаОборот</dataPath>
+		<expression>Сумма(СуммаОборот)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>СуммаПриход</dataPath>
+		<expression>Сумма(СуммаПриход)</expression>
+	</totalField>
+	<totalField>
+		<dataPath>СуммаРасход</dataPath>
+		<expression>Сумма(СуммаРасход)</expression>
+	</totalField>
+	<parameter>
+		<name>НачалоПериода</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Начало периода</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<parameter>
+		<name>КонецПериода</name>
+		<title xsi:type="v8:LocalStringType">
+			<v8:item>
+				<v8:lang>ru</v8:lang>
+				<v8:content>Конец периода</v8:content>
+			</v8:item>
+		</title>
+		<valueType>
+			<v8:Type>xs:dateTime</v8:Type>
+			<v8:DateQualifiers>
+				<v8:DateFractions>DateTime</v8:DateFractions>
+			</v8:DateQualifiers>
+		</valueType>
+		<value xsi:type="xs:dateTime">0001-01-01T00:00:00</value>
+		<useRestriction>false</useRestriction>
+	</parameter>
+	<settingsVariant>
+		<dcsset:name>Основной</dcsset:name>
+		<dcsset:presentation xsi:type="xs:string">Основной</dcsset:presentation>
+		<dcsset:settings xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows"/>
+	</settingsVariant>
+</DataCompositionSchema>
